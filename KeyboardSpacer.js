@@ -38,6 +38,7 @@ const defaultAnimation = {
 export default class KeyboardSpacer extends Component {
   static propTypes = {
     topSpacing: PropTypes.number,
+    androidAdjustResize: PropTypes.boolean,
     onToggle: PropTypes.func,
     style: ViewPropTypes.style,
   };
@@ -91,7 +92,8 @@ export default class KeyboardSpacer extends Component {
     // when external physical keyboard is connected
     // event.endCoordinates.height still equals virtual keyboard height
     // however only the keyboard toolbar is showing if there should be one
-    const keyboardSpace = (screenHeight - event.endCoordinates.screenY) + this.props.topSpacing;
+    const keyboardSpace = this.props.topSpacing + (this.props.androidAdjustResize ? 0 :
+        (screenHeight - event.endCoordinates.screenY));
     this.setState({
       keyboardSpace,
       isKeyboardOpened: true
