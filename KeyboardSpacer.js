@@ -92,8 +92,8 @@ export default class KeyboardSpacer extends Component {
     // when external physical keyboard is connected
     // event.endCoordinates.height still equals virtual keyboard height
     // however only the keyboard toolbar is showing if there should be one
-    const keyboardSpace = this.props.topSpacing + (this.props.androidAdjustResize ? 0 :
-        (screenHeight - event.endCoordinates.screenY));
+    const keyboardSpace = this.props.topSpacing + (Platform.OS === 'android' && this.props.androidAdjustResize
+        ? 0 : (screenHeight - event.endCoordinates.screenY));
     this.setState({
       keyboardSpace,
       isKeyboardOpened: true
